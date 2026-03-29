@@ -1,0 +1,148 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #f4f6f8;
+    color: #1f2933;
+}
+
+nav {
+    background-color: #1f2933;
+    color: white;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav h1 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+    margin: 0;
+    padding: 0;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+main {
+    padding: 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+section {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    margin-bottom: 2rem;
+}
+
+form input,
+form select,
+form textarea {
+    width: 100%;
+    max-width: 500px;
+    padding: 0.75rem;
+    margin-top: 0.25rem;
+    margin-bottom: 1rem;
+    border: 1px solid #cbd2d9;
+    border-radius: 6px;
+    box-sizing: border-box;
+    font-size: 1rem;
+}
+
+button {
+    background-color: #1f2933;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.25rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.95rem;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+.alerts-grid {
+    display: grid;
+    gap: 1rem;
+}
+
+.alert-card {
+    background: #ffffff;
+    border-left: 5px solid #1f2933;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+.alert-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+.alert-header h4 {
+    margin: 0;
+}
+
+.alert-message {
+    margin: 1rem 0;
+    line-height: 1.5;
+}
+
+.alert-time {
+    font-size: 0.9rem;
+    color: #52606d;
+}
+
+.severity-badge {
+    padding: 0.35rem 0.75rem;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: white;
+}
+
+.severity-low {
+    background-color: #2f855a;
+}
+
+.severity-medium {
+    background-color: #d69e2e;
+}
+
+.severity-high {
+    background-color: #c53030;
+}
+
+.delete-btn {
+    background-color: #7b8794;
+    margin-top: 0.75rem;
+}
+.login-section {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.error-message {
+    background-color: #fde8e8;
+    color: #9b1c1c;
+    border: 1px solid #f5c2c7;
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+}

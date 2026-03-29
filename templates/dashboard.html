@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard | Security Dashboard{% endblock %}
+
+{% block content %}
+<section>
+    <h2>Dashboard</h2>
+    <p>Create and review security alerts below.</p>
+</section>
+
+<section>
+    <h3>Add New Alert</h3>
+    <form method="POST" action="{{ url_for('dashboard') }}">
+        <label for="alert_type">Alert Type:</label><br>
+        <input type="text" id="alert_type" name="alert_type" required>
+
+        <label for="severity">Severity:</label><br>
+        <select id="severity" name="severity" required>
+            <option value="Low">Low</option>
+            <option value="Medium">Medium</option>
+            <option value="High">High</option>
+        </select>
+
+        <label for="message">Message:</label><br>
+        <textarea id="message" name="message" rows="4" required></textarea>
+
+        <button type="submit">Save Alert</button>
+    </form>
+</section>
+<section>
+    <h3>Upload Log File</h3>
+    <form method="POST" action="{{ url_for('dashboard') }}" enctype="multipart/form-data">
+        <label for="log_file">Select Log File:</label><br>
+        <input type="file" id="log_file" name="log_file" accept=".txt" required><br><br>
+        <button type="submit">Upload and Parse</button>
+    </form>
+<section>
+<section>
+    <h3>Run Port Scan</h3>
+    <form method="POST" action="{{ url_for('dashboard') }}">
+        <label for="target_ip">Target IP Address:</label><br>
+        <input type="text" id="target_ip" name="target_ip" placeholder="127.0.0.1" required>
+        <button type="submit">Scan Target</button>
+    </form>
+</section>
+
+<section>
+    <h3>Port Scan Results</h3>
+    {% if scan_results %}
+        <div class="alert-card">
+            {% for result in scan_results %}
+                <p>{{ result }}</p>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>No scan results yet.</p>
+    {% endif %}
+</section>
+<section>
+    <h3>Scan History</h3>
+    {% if scans %}
+        <div class="alerts-grid">
+            {% for scan in scans %}
+                <div class="alert-card">
+                    <p><strong>Target:</strong> {{ scan["target"] }}</p>
+                    <p><strong>Result:</strong> {{ scan["result"] }}</p>
+                    <p><strong>Timestamp:</strong> {{ scan["timestamp"] }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>No scans saved yet.</p>
+    {% endif %}
+</section>
+    <h3>Filter Alerts</h3>
+    <form method="GET" action="{{ url_for('dashboard') }}">
+        <label for="severity_filter">Filter by Severity:</label><br>
+        <select id="severity_filter" name="severity">
+            <option value="All" {% if selected_severity == "All" %}selected{% endif %}>All</option>
+            <option value="Low" {% if selected_severity == "Low" %}selected{% endif %}>Low</option>
+            <option value="Medium" {% if selected_severity == "Medium" %}selected{% endif %}>Medium</option>
+            <option value="High" {% if selected_severity == "High" %}selected{% endif %}>High</option>
+        </select>
+        <button type="submit">Apply Filter</button>
+    </form>
+</section>
+
+<section>
+    <h3>Saved Alerts</h3>
+
+    {% if alerts %}
+        <div class="alerts-grid">
+            {% for alert in alerts %}
+                <div class="alert-card">
+                    <div class="alert-header">
+                        <h4>{{ alert["alert_type"] }}</h4>
+                        <span class="severity-badge severity-{{ alert['severity'] | lower }}">
+                            {{ alert["severity"] }}
+                        </span>
+                    </div>
+
+                    <p class="alert-message">{{ alert["message"] }}</p>
+                    <p class="alert-time">Created: {{ alert["timestamp"] }}</p>
+
+                    <form method="POST" action="{{ url_for('remove_alert', alert_id=alert['id']) }}">
+                        <button type="submit" class="delete-btn">Delete</button>
+                    </form>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>No alerts saved yet.</p>
+    {% endif %}
+</section>
+{% endblock %}

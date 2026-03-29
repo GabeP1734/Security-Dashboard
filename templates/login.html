@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}Login | Security Dashboard{% endblock %}
+
+{% block content %}
+<section class="login-section">
+    <h2>Login</h2>
+    <p>Enter your credentials to access the dashboard.</p>
+
+    {% if error %}
+        <div class="error-message">
+            {{ error }}
+        </div>
+    {% endif %}
+
+    <form method="POST" action="{{ url_for('login') }}">
+        <label for="username">Username:</label><br>
+        <input type="text" id="username" name="username" required>
+
+        <label for="password">Password:</label><br>
+        <input type="password" id="password" name="password" required>
+
+        <button type="submit">Login</button>
+    </form>
+</section>
+{% endblock %}
